@@ -1,0 +1,147 @@
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+  
+  body {
+    background-color: #fff;
+    background-image: radial-gradient(
+        ellipse at bottom,
+        #fafafa 5%,
+        transparent 60%
+      ),
+      linear-gradient(136deg, transparent, #eee 290%),
+      linear-gradient(115deg, #fafafa, transparent 40%),
+      linear-gradient(180deg, transparent 0, #ddd 70%),
+      radial-gradient(ellipse at -70% -180%, transparent 80%, #eee 0),
+      radial-gradient(ellipse at bottom, #71c7ee 40%, transparent 80%),
+      radial-gradient(ellipse at 5% 340%, transparent 80%, #ddd 0);
+    background-repeat: no-repeat;
+    color: #555;
+  }
+  
+  /** Layout **/
+  body { display: flex; flex-direction: column; }
+  section.contents {
+    flex-direction: row;
+    display: flex;
+  }
+  section.contents aside {
+    flex: 0;
+    display: flex;
+    flex-direction: column;
+    order: -1;
+  }
+  section.contents aside fieldset {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  section.contents aside .align-top {
+    align-self: flex-start;
+  }
+  section.contents article {
+    flex: 1;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    background-color: antiquewhite;
+  }
+  
+  /** Title */
+  h1 {
+    font-weight: 700;
+    font-size: 48px;
+    padding: 0;
+    line-height: .9em;
+    letter-spacing: -2px;
+    margin: 0 0 30px 0;
+  }
+  
+  /** Controls for the demo (left column) */
+  #demo_controls {
+    background: linear-gradient(90deg, rgba(255,255,255,1) 10%, rgba(255,255,255,0) 100%);
+    padding: 40px 20px 0px 20px;
+    z-index: 10;
+    background-color: aqua;
+  }
+  #demo_controls fieldset {
+    padding: 0;
+    border: none;
+    width: 500px;
+  }
+  #demo_controls legend {
+    text-align: center;
+    font-size: 20px;
+    line-height: 40px;
+    margin-bottom: 3px;
+  }
+  #demo_controls select.screen {
+    display: block;
+    width: 120px;
+    padding: 4px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  #demo_controls input {
+    display: block;
+    width: 100px;
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
+  /** Keep controls that  */
+  #demo_controls .tight input {
+    margin: 0px;
+  }
+  #demo_controls input[type="button"] {
+    line-height: 10px;
+    font-size: 14px;
+    border-radius: 15px;
+    border: 1px solid #aaa;
+    border-style: outset;
+    background-color: #fff;
+    height: 30px;
+    color: #555;
+    transition: all 100ms ease-in-out;
+    cursor: pointer;
+  }
+  #demo_controls input[type="button"]:hover {
+    /* .active:hover background-color: #96B6E3;*/
+    border-color: #1c68d4;
+    background-color: #1c68d4;
+    color: white;
+  }
+  #demo_controls input[type="button"].active {
+    border-color: #1c68d4;
+    background-color: #1c68d4;
+    color: white;
+  }
+  #demo_controls input#value {
+    font-size: 32px;
+    line-height: 1em;
+    min-height: 30px;
+    color: #888;
+  }
+  #demo_controls input#increment {
+    /* Center vertically next to taller input#value */
+    position: relative;
+    top: -6px;
+  }
+  #demo_controls .disabled {
+    pointer-events: none;
+    opacity: .5;
+  }
+  
+  /** The style for the DIV where flutter will be rendered, and the CSS fx */
+  #flutter_target {
+    border: 1px solid #aaa;
+    width: 320px;
+    height: 480px;
+    border-radius: 0px;
+    transition: all 150ms ease-in;
+    align-self: center;
+  }
+
