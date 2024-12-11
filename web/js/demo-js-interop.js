@@ -31,6 +31,13 @@
           appState.decrement();
       });
 
+        // New: Listen to input field changes
+    let textInputField = document.querySelector("#textInput");
+    textInputField.addEventListener("input", (event) => {
+      const inputValue = event.target.value;
+      appState.updateInput(inputValue); // Call a Dart method to handle input
+    });
+
       let screenSelector = document.querySelector("#screen-selector");
       screenSelector.addEventListener("change", (event) => {
           appState.changeDemoScreenTo(event.target.value);

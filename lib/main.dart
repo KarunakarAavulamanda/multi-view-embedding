@@ -19,6 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _streamController = StreamController<void>.broadcast();
   int _counterScreenCount = 0;
+  String _inputText = ""; // New: To store input text from JavaScript
 
   @override
   void initState() {
@@ -50,6 +51,15 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  // New: Method to handle input from JavaScript
+  @js.JSExport()
+  void updateInput(String input) {
+    setState(() {
+      _inputText = input; // Update the state with the new input
+      _streamController.add(null);
+    });
+  }
+
   @js.JSExport()
   void addHandler(void Function() handler) {
     _streamController.stream.listen((event) {
@@ -71,6 +81,7 @@ class _MyAppState extends State<MyApp> {
       home: CounterDemo(
         title: 'Counter',
         numToDisplay: _counterScreenCount,
+        inputText: _inputText, // Pass the input text to the CounterDemo widget
         incrementHandler: increment,
         decrementHandler: decrement,
       ),
@@ -81,6 +92,7 @@ class _MyAppState extends State<MyApp> {
 class CounterDemo extends StatefulWidget {
   final String title;
   final int numToDisplay;
+  final String inputText; // New: Input text from JS
   final VoidCallback incrementHandler;
   final VoidCallback decrementHandler;
 
@@ -88,6 +100,7 @@ class CounterDemo extends StatefulWidget {
     super.key,
     required this.title,
     required this.numToDisplay,
+    required this.inputText,
     required this.incrementHandler,
     required this.decrementHandler,
   });
@@ -113,6 +126,12 @@ class _CounterDemoState extends State<CounterDemo> {
             Text(
               '${widget.numToDisplay}',
               style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 20),
+            const Text('Input Text from JavaScript:'),
+            Text(
+              widget.inputText, // Display the input text
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],
         ),
