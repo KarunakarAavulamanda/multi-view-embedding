@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:js_interop' as js;
 import 'dart:js_interop_unsafe' as js_util;
-
+import 'dart:html' as html;
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,6 +26,22 @@ class _MyAppState extends State<MyApp> {
     final export = js.createJSInteropWrapper(this);
     js.globalContext['_appState'] = export;
     js.globalContext.callMethod('_stateSet'.toJS);
+    _loadJsFile("web/js/demo-js-interop.js");
+  }
+
+  void _loadJsFile(String jsFilePath) {
+    final script = html.ScriptElement();
+    script.src = jsFilePath;
+    script.type = "text/javascript";
+    script.async = true;
+
+    // Add a callback for when the script loads successfully.
+    script.onLoad.listen((event) {
+      print("JavaScript file loaded successfully!");
+    });
+
+    // Add the script to the DOM.
+    html.document.head?.append(script);
   }
 
   @override

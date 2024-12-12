@@ -54,20 +54,21 @@
       </aside>
     </section>
 
-    <script>
-      {{flutter_js}}
-      {{flutter_build_config}}
-
-      const target = document.getElementById('flutter_target');
-      _flutter.loader.load({
-        onEntrypointLoaded: async function (engineInitializer) {
-          const appRunner = await engineInitializer.initializeEngine({
-            hostElement: target,
-          });
-          await appRunner.runApp();
-        }
-      });
-    </script>
+<script>
+        {{flutter_js}}
+        {{flutter_build_config}}
+  window.addEventListener('load', () => {
+    const target = document.getElementById('flutter_target');
+    _flutter.loader.load({
+      onEntrypointLoaded: async function (engineInitializer) {
+        const appRunner = await engineInitializer.initializeEngine({
+          hostElement: target,
+        });
+        await appRunner.runApp();
+      }
+    });
+  });
+</script>
     <script src="js/demo-js-interop.js" defer></script>
   </body>
 </html>
